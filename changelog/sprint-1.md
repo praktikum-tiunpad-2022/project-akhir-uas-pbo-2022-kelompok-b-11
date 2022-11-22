@@ -26,7 +26,9 @@
 Sprint kemarin dianggap terlalu sedikit sehingga diperlukan adanya penyesuaian tugas
 
 ## Next Sprint Backlog (Sprint 2)
-| ID  | Title/Desc | Asignee | 
-| --- | ---------- | ------- | 
-| 2.1 | Preparing the x | Jane Doe | 
-| 2.2 | Make the x | John Doe | 
+| ID  | Title/Desc                       | Asignee  | 
+| --- | ---------------------------------|----------| 
+| 2.1 | membuat method pada class Game   | Glory    | 
+| 2.2 | membuat method pada class Rules  | Nabila   | 
+| 2.3 | membuat method pada class Player | Glory    |
+| 2.4 | membuat rancangan tampilan GUI   | Nabila   |
