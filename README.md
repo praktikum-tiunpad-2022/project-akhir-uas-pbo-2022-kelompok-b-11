@@ -48,4 +48,4 @@ UML image here
 
 ## Notable Assumption and Design App Details
 
-TO;DO
+![alt text](https://github.com/praktikum-tiunpad-2022/project-akhir-uas-pbo-2022-kelompok-b-11/blob/76c2749da61ff992efe5c51577322e1c7c0d62a1/15%20puzzle%20game%202.jpg)
