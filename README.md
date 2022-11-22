@@ -13,7 +13,7 @@ This repository is a final project (Java GUI) from Object-Oriented Programming C
 | 140810210008  | Nabila Sa'diyyah |
 
 ## Change log
-- **[Sprint Planning](changelog/sprint-planning.md) - (planning date)** 
+- **[Sprint Planning](changelog/sprint-planning.md) - (16 November 2022)** 
    - explore pembuatan games 15 puzzle
    - instalasi program kebutuhan (gradle, javaFX)
    - Mebuat fungsi yang diperlukan dalam game
@@ -42,9 +42,9 @@ This repository is a final project (Java GUI) from Object-Oriented Programming C
 
 ## Classes Used
 
-class Game : untuk membuat method yang membuat game berjalan
-class Player : untuk menyimpan data dan method dari player
-class Rules : untuk menyimpan data dan method aturan dalam game
+- class Game : untuk membuat method yang membuat game berjalan
+- class Player : untuk menyimpan data dan method dari player
+- class Rules : untuk menyimpan data dan method aturan dalam game
 
 UML image here
 
