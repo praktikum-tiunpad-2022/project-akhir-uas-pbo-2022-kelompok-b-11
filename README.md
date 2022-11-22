@@ -42,7 +42,9 @@ This repository is a final project (Java GUI) from Object-Oriented Programming C
 
 ## Classes Used
 
-TO;DO
+class Game : untuk membuat method yang membuat game berjalan
+class Player : untuk menyimpan data dan method dari player
+class Rules : untuk menyimpan data dan method aturan dalam game
 
 UML image here
 
