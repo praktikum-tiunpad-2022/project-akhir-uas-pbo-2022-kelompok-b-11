@@ -6,11 +6,9 @@ import java.util.Random;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Control;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -40,7 +38,6 @@ public class App extends Application {
     public Parent createContent() {
         GridPane root = new GridPane();
         root.setPrefSize(cellSize * nCell, cellSize * nCell);
-
         //When game start
         shuffleBoard();
 
@@ -50,6 +47,7 @@ public class App extends Application {
                 root.getChildren().add(tile);
             }
         }
+
         return root;
     }
 
@@ -57,13 +55,18 @@ public class App extends Application {
         private Button button;
 
         Cell(int y, int x) {
-            button = new Button(String.valueOf(board[y][x]));
+            int num = board[y][x];
+            if (num != -1) {
+                button = new Button(String.valueOf(num));
+            } else {
+                button = new Button();
+            }
+
             setTranslateX(x * cellSize);
             setTranslateY(y * cellSize);
 
             button.setPrefSize(cellSize, cellSize);
-            button.setStyle(
-                "-fx-background-radius: 10px;");
+            button.setStyle("-fx-background-radius: 10px;");
             getChildren().add(button);
         }
     }
@@ -91,6 +94,17 @@ public class App extends Application {
                 count += 1;
             }
         } 
+    }
+
+    public boolean isSolved() {
+        if (array[array.length] != -1) { return false; }
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != (i+1)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void main(String[] args) {
