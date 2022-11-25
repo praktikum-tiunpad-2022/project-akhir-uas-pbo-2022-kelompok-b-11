@@ -6,12 +6,14 @@ import java.util.Random;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Control;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -19,6 +21,11 @@ public class App extends Application {
 
     private static final int nCell = 4;
     private static final int cellSize = 100;
+    Random rand = new Random();
+    //Declare 1D array to store 1-16 num
+    private static int[] array = new int[nCell * nCell];
+    //Declare 2D array to store 1-16 num
+    private static int[][] board = new int[nCell][nCell];
 
     @Override
     public void start(Stage stage) {
@@ -31,8 +38,11 @@ public class App extends Application {
     }
 
     public Parent createContent() {
-        Pane root = new Pane();
+        GridPane root = new GridPane();
         root.setPrefSize(cellSize * nCell, cellSize * nCell);
+
+        //When game start
+        shuffleBoard();
 
         for (int y = 0; y < nCell; y++) {
             for (int x = 0; x < nCell; x++) {
@@ -44,17 +54,43 @@ public class App extends Application {
     }
 
     private static class Cell extends StackPane {
-        private Rectangle bg;
+        private Button button;
 
-        Cell(int x, int y) {
+        Cell(int y, int x) {
+            button = new Button(String.valueOf(board[y][x]));
             setTranslateX(x * cellSize);
             setTranslateY(y * cellSize);
 
-            bg = new Rectangle(cellSize, cellSize, Color.YELLOW);
-            bg.setStroke(Color.WHITE);
-
-            getChildren().add(bg);
+            button.setPrefSize(cellSize, cellSize);
+            button.setStyle(
+                "-fx-background-radius: 10px;");
+            getChildren().add(button);
         }
+    }
+
+    public void shuffleBoard() {
+        //Assign the array
+        for (int i = 0; i < (nCell*nCell); i++) {
+            array[i] = i+1;
+        }
+        array[15] = -1;
+
+        //Suffle the aray
+        for (int i = 0; i < (nCell*nCell); i++) {
+            int randomIndex = rand.nextInt(16);
+            int temp = array[i];
+            array[i] = array[randomIndex];
+            array[randomIndex] = temp;
+        }
+
+        //Store 1D array to 2D array
+        int count = 0;
+        for (int y = 0; y < nCell; y++) {
+            for (int x = 0; x < nCell; x++) {
+                board[y][x] = array[count];
+                count += 1;
+            }
+        } 
     }
 
     public static void main(String[] args) {
