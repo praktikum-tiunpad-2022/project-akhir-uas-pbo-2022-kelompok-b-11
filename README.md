@@ -11,6 +11,7 @@ This repository is a final project (Java GUI) from Object-Oriented Programming C
 | ------------- |------------------|
 | 140810210006  | Glory Cornelia   |
 | 140810210008  | Nabila Sa'diyyah |
+| 140810210020  | Devina Dixie     |
 
 ## Change log
 - **[Sprint Planning](changelog/sprint-planning.md) - (16 November 2022)** 
