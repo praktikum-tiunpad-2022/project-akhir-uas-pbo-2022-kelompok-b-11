@@ -49,7 +49,9 @@ public class App extends Application {
         Scene gameScene = new Scene(layout, 420, 500);
         gameScene.setFill(Color.web("#FFFFFF"));
         
-        play.setOnAction(e-> stage.setScene(gameScene));
+        play.setOnAction(e-> {
+            stage.setScene(gameScene);
+            time.startTimer();});
         stage.setResizable(false);
         stage.show();
     }

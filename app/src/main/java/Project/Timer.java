@@ -13,9 +13,7 @@ public class Timer {
 
     public Timer() {
         label = new Label();
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> incrementLabel()));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.playFromStart();
+        count = 1;
     }
 
     private void incrementLabel() {
@@ -24,6 +22,12 @@ public class Timer {
 
     public Label getTimeLabel() {
         return label;
+    }
+
+    public void startTimer() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> incrementLabel()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.playFromStart();
     }
 
     public void stopTimer() {
