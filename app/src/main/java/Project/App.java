@@ -27,6 +27,12 @@ public class App extends Application {
     private static int[][] board = new int[nCell][nCell];
     //Button to start the game
     private static Button play;
+    //Button for each tile
+    private static Button[][] button = new Button[nCell][nCell];
+    //button style custom
+    private static String buttonStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: Orange; -fx-text-fill: white; -fx-border-color: Tomato; -fx-border-radius: 10;";
+    private static String hoverStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: Maroon; -fx-text-fill: white; -fx-border-color: Tomato; -fx-border-radius: 10;";
+    private static String nonButtonStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: White; -fx-text-fill: White;";
 
     @Override
     public void start(Stage stage) {
@@ -90,27 +96,25 @@ public class App extends Application {
     }
 
     private static class Cell extends StackPane {
-        private Button button;
-        private String buttonStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: Orange; -fx-text-fill: white; -fx-border-color: Tomato; -fx-border-radius: 10;";
-        private String hoverStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: Maroon; -fx-text-fill: white; -fx-border-color: Tomato; -fx-border-radius: 10;";
 
         Cell(int y, int x) {
-            button = new Button();
+            button[y][x] = new Button();
             setTranslateX(x * cellSize);
             setTranslateY(y * cellSize);
-            button.setPrefSize(cellSize, cellSize);
+            button[y][x].setPrefSize(cellSize, cellSize);
 
             int num = board[y][x];
             if (num != -1) {
-                button.setText(String.valueOf(num));
-                button.setStyle(buttonStyle);
-                button.setOnMouseEntered(e -> button.setStyle(hoverStyle));
-                button.setOnMouseExited(e -> button.setStyle(buttonStyle));
+                button[y][x].setText(String.valueOf(num));
+                button[y][x].setStyle(buttonStyle);
+                button[y][x].setOnMouseEntered(e -> button[y][x].setStyle(hoverStyle));
+                button[y][x].setOnMouseExited(e -> button[y][x].setStyle(buttonStyle));
             } else {
-                button.setStyle("-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: White; -fx-text-fill: White;");
+                button[y][x].setStyle(nonButtonStyle);
             }
             
-            getChildren().add(button);
+            button[y][x].setOnAction(e -> swapTheTile(x, y));
+            getChildren().add(button[y][x]);
         }
     }
 
@@ -150,6 +154,40 @@ public class App extends Application {
         return true;
     }
 
+    public static void swapTheTile(int x, int y) {
+        if (board[y][x] != -1) {
+            //swap right
+            if (x+1 < nCell && board[y][x+1] == -1) {
+                buttonSet(x, x+1, y, y);
+            }
+            //swap left 
+            else if (x-1 >= 0 && board[y][x-1] == -1) {
+                buttonSet(x, x-1, y, y);
+            }
+            //swap up
+            else if (y-1 >= 0 && board[y-1][x] == -1) {
+                buttonSet(x, x, y, y-1);
+            }
+            //swap down
+            else if (y+1 < nCell && board[y+1][x] == -1) {
+                buttonSet(x, x, y, y+1);
+            }
+        }
+    }
+
+    public static void buttonSet(int x1, int x2, int y1, int y2) {
+        int temp = board[y1][x1];
+        board[y1][x1] = board[y2][x2];
+        board[y2][x2] = temp;
+        button[y1][x1].setText("");
+        button[y1][x1].setStyle(nonButtonStyle);
+        button[y1][x1].setOnMouseEntered(e -> button[y1][x1].setStyle(nonButtonStyle));
+        button[y1][x1].setOnMouseExited(e -> button[y1][x1].setStyle(nonButtonStyle));
+        button[y2][x2].setText(String.valueOf(board[y2][x2]));
+        button[y2][x2].setStyle(buttonStyle);
+        button[y2][x2].setOnMouseEntered(e -> button[y2][x2].setStyle(hoverStyle));
+        button[y2][x2].setOnMouseExited(e -> button[y2][x2].setStyle(buttonStyle));
+    }
     public static void main(String[] args) {
         launch(args);
     }
