@@ -19,7 +19,7 @@
 | --- | ------------------------------------------ | ------- | ------ |
 | 2.1 | membuat method pada class Game             | Glory   | DONE   |
 | 2.2 | membuat method pada class Rules            | -       | FAIL   |
-| 2.3 | membuat method pada class Player           | Nabila  | NOT YET|
+| 2.3 | membuat method pada class Player           | Nabila  | DONE   |
 | 2.4 | membuat rancangan tampilan GUI             | Nabila  | DONE   |
 | 3.1 | membuat tampilan GUI                       | Glory   | DONE   |
 
