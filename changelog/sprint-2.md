@@ -1,31 +1,36 @@
 # Scrum Report (Sprint 2)
-| From dd/mm/yyyy to dd/mm/yyyy
+| 23 November - 29 November 2022
 
 ## Team (Insert your name)
-| NPM           | Name        |
-| ------------- |-------------|
-| 140810xx00xx  | John Doe    |
-| 140810xx00xx  | Jane Doe    |
-| 140810xx00xx  | Lorem Ipsum |
+| NPM           | Name             |
+| ------------- |------------------|
+| 140810210006  | Glory Cornelia   |
+| 140810210008  | Nabila Sa'diyyah |
+| 140810210020  | Devina Dixie     |
 
 ## Sprint Overview
 | Planned (n)   | Completed (n) |
 | ------------- |-------------- |
-| n             | n             |
+| 5             | 3             |
 
 ## Sprint 2 Backlog
 
-| ID  | Title/Desc | Asignee | Status |
-| --- | ---------- | ------- | ------ |
-| 2.1 | Preparing the x | Jane Doe | DONE |
-| 2.2 | Make the x | John Doe | FAILED |
+| ID  | Title/Desc                                 | Asignee | Status |
+| --- | ------------------------------------------ | ------- | ------ |
+| 2.1 | membuat method pada class Game             | Glory   | DONE   |
+| 2.2 | membuat method pada class Rules            | -       | FAIL   |
+| 2.3 | membuat method pada class Player           | Nabila  | NOT YET|
+| 2.4 | membuat rancangan tampilan GUI             | Nabila  | DONE   |
+| 3.1 | membuat tampilan GUI                       | Glory   | DONE   |
 
 ## Retrospective 
 
-Sprint kemarin dianggap terlalu sedikit sehingga diperlukan adanya penyesuaian tugas. Lorem ipsum dolor sit amet
+Sprint 2 sudah bisa memainkan game, tinggal menyempurnakan tampilan dan membenarkan mekanisme win nya
 
 ## Next Sprint Backlog (Sprint 3)
-| ID  | Title/Desc | Asignee | 
-| --- | ---------- | ------- | 
-| 3.1 | Preparing the x | Jane Doe | 
-| 3.2 | Make the x | John Doe | 
+| ID  | Title/Desc                                 | Asignee | 
+| --- | ------------------------------------------ | ------- | 
+| 2.2 | membuat mekanisme win                      | Glory   |
+| 3.2 | menyempurnakan tampilan dan movenya        | Nabila  |
+| 3.3 | melakukan running test                     | Glory   |
+| 3.4 | melakukan running test                     | Nabila  |
