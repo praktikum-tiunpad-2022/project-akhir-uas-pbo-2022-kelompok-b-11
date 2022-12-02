@@ -14,33 +14,31 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    boolean createNew;
-
     private static Button play;
+    private static TextField name;
+    Player player = new Player();
 
     @Override
     public void start(Stage stage) {
         stage.setTitle("Game Of Fifteen Project");
-        Scene startScene = new Scene (home());
+        Scene startScene = new Scene (home(player));
         stage.setScene(startScene);
         play.setOnAction(e -> {
-            Game.startGame(stage);
-            createNew = Game.backToNewGame();});
-        
-        if (createNew == true){
-            start(stage);
-        }
+            player.setName(name.getText());
+            player.setMoves(0);
+            Game.startGame(stage, player);
+            });
         
         stage.setResizable(false);
         stage.show();
     }
 
-    public Parent home() {
+    public Parent home(Player player) {
         VBox root = new VBox(10);
         Label tittle = new Label("Welcome to 15 Puzzle Game");
         Label desc = new Label("Enter your name");
 
-        TextField name = new TextField();
+        name = new TextField();
         name.setMaxWidth(200);
         name.setPromptText("Name");
         play = new Button("Play");

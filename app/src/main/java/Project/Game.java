@@ -28,31 +28,39 @@ public class Game {
     private static Button[][] button = new Button[nCell][nCell];
     //to check if player won
     private static boolean win;
+    private static int moves = 0;
+    private static Player playerGame;
+    private static Button newButton;
     //button style custom
     private static String buttonStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: Orange; -fx-text-fill: white; -fx-border-color: Tomato; -fx-border-radius: 10;";
     private static String hoverStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: Maroon; -fx-text-fill: white; -fx-border-color: Tomato; -fx-border-radius: 10;";
     private static String nonButtonStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: White; -fx-text-fill: White;";
 
-    public static void startGame(Stage stage) {
+    public static void startGame(Stage stage, Player player) {
+        playerGame = player;
         stage.setTitle("Game Of Fifteen Project");
 
         Timer time = new Timer();
         time.startTimer();
 
-        Button newButton = new Button("New Game");
+        newButton = new Button("New Game");
         newButton.setPadding(new Insets(10, 10, 10,10));
         newButton.setOnAction(e -> {
+            time.stopTimer();
             App newGameApp = new App();
             newGameApp.start(stage);
         });
-        
+        Label nameTest = new Label(player.getName());
         Button resetButton = new Button("Reset");
         resetButton.setPadding(new Insets(10, 10, 10,10));
-        
+        Button testButton = new Button("end game");
+        testButton.setOnAction(e -> winContent(stage));
+
         HBox buttonLayout = new HBox(10);
-        buttonLayout.getChildren().addAll(newButton, resetButton);
+        buttonLayout.getChildren().addAll(newButton, resetButton, nameTest, testButton);
+        buttonLayout.setAlignment(Pos.CENTER);
         VBox layout = new VBox();
-        layout.getChildren().addAll(buttonLayout, time.getTimeLabel(), createContent());
+        layout.getChildren().addAll(buttonLayout, time.getTimeLabel(), createContent(stage));
         layout.setAlignment(Pos.CENTER);
         
         Scene gameScene = new Scene(layout, 420, 500);
@@ -61,13 +69,14 @@ public class Game {
         
         resetButton.setOnAction(e -> {
             time.stopTimer();
-            startGame(stage);});
+            player.setMoves(0);
+            startGame(stage, player);});
 
         stage.setResizable(false);
         stage.show();
     }
 
-    public static Parent createContent() {
+    public static Parent createContent(Stage stage) {
         GridPane root = new GridPane();
         root.setPrefSize(cellSize * nCell, cellSize * nCell);
         root.setPadding(new Insets(10, 10, 10, 10));
@@ -77,7 +86,7 @@ public class Game {
 
         for (int y = 0; y < nCell; y++) {
             for (int x = 0; x < nCell; x++) {
-                Cell tile = new Cell(x, y);
+                Cell tile = new Cell(x, y, stage);
                 root.getChildren().add(tile);
             }
         }
@@ -86,7 +95,7 @@ public class Game {
 
     private static class Cell extends StackPane {
 
-        Cell(int y, int x) {
+        Cell(int y, int x, Stage stage) {
             button[y][x] = new Button();
             setTranslateX(x * cellSize);
             setTranslateY(y * cellSize);
@@ -102,13 +111,9 @@ public class Game {
                 button[y][x].setStyle(nonButtonStyle);
             }
             
-            button[y][x].setOnAction(e -> swapTheTile(x, y));
+            button[y][x].setOnAction(e -> swapTheTile(x, y, stage));
             getChildren().add(button[y][x]);
         }
-    }
-
-    public static boolean backToNewGame() {
-        return true;
     }
 
     public static void shuffleBoard() {
@@ -154,31 +159,39 @@ public class Game {
         return true;
     }
 
-    public static void swapTheTile(int x, int y) {
+    public static void swapTheTile(int x, int y, Stage stage) {
         win = isWin();
         if (win == false) {
             if (board[y][x] != -1) {
                 //swap right
                 if (x+1 < nCell && board[y][x+1] == -1) {
                     buttonSwap(x, x+1, y, y);
+                    moves++;
+                    playerGame.setMoves(moves);
                 }
                 //swap left 
                 else if (x-1 >= 0 && board[y][x-1] == -1) {
                     buttonSwap(x, x-1, y, y);
+                    moves++;
+                    playerGame.setMoves(moves);
                 }
                 //swap up
                 else if (y-1 >= 0 && board[y-1][x] == -1) {
                     buttonSwap(x, x, y, y-1);
+                    moves++;
+                    playerGame.setMoves(moves);
                 }
                 //swap down
                 else if (y+1 < nCell && board[y+1][x] == -1) {
                     buttonSwap(x, x, y, y+1);
+                    moves++;
+                    playerGame.setMoves(moves);
                 }
             }
         }
         win = isWin();
         if (win == true) {
-            winContent();
+            winContent(stage);
         }
     }
 
@@ -196,13 +209,16 @@ public class Game {
         button[y2][x2].setOnMouseExited(e -> button[y2][x2].setStyle(buttonStyle));
     }
 
-    public static void winContent() {
-        Stage winStage = new Stage();
+    public static void winContent(Stage winStage) {
         winStage.setTitle("Win");
-        Label winLabel = new Label("You solved the puzzle");
-        Scene winScene = new Scene(winLabel, 100, 100);
+        Label winLabel1 = new Label("Congrats " + playerGame.getName());
+        Label winLabel2 = new Label("You solved the puzzle");
+        Label winLabel3 = new Label("Moves : " + playerGame.getMoves());
+        VBox layoutWinText = new VBox();
+        layoutWinText.getChildren().addAll(winLabel1, winLabel2, winLabel3, newButton);
+        Scene winScene = new Scene(layoutWinText);
         winStage.setScene(winScene);
-        winStage.show();
+        winStage.showAndWait();
     }
 
 }
