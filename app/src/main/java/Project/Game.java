@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
+import javafx.scene.text.*;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 
@@ -32,9 +33,9 @@ public class Game {
     private static Player playerGame;
     private static Button newButton;
     //button style custom
-    private static String buttonStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: Orange; -fx-text-fill: white; -fx-border-color: Tomato; -fx-border-radius: 10;";
-    private static String hoverStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: Maroon; -fx-text-fill: white; -fx-border-color: Tomato; -fx-border-radius: 10;";
-    private static String nonButtonStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: White; -fx-text-fill: White;";
+    private static String buttonStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: rgba(50, 50, 50, 0.6); -fx-text-fill: white; -fx-border-color: #454545; -fx-border-radius: 10;";
+    private static String hoverStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: rgba(125, 125, 125, 0.6); -fx-text-fill: white;";
+    private static String nonButtonStyle = "-fx-background-radius: 10px; -fx-font-size:40; -fx-background-color: rgba(125, 125, 125, 0.6); -fx-text-fill: White;";
 
     public static void startGame(Stage stage, Player player) {
         playerGame = player;
@@ -43,32 +44,57 @@ public class Game {
         Timer time = new Timer();
         time.startTimer();
 
+        Text text = new Text("Hello " + player.getName() + ", enjoy the game!");
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        text.setWrappingWidth(200);
+        text.setTextAlignment(TextAlignment.CENTER);
+        text.setFill(Color.WHITE);
+
+        //Create New Button to restart the game
         newButton = new Button("New Game");
         newButton.setPadding(new Insets(10, 10, 10,10));
+        newButton.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        newButton.setStyle("-fx-background-radius: 10px; -fx-background-color: rgba(43, 43, 43, 0.6); -fx-text-fill: white; -fx-border-color: #454545; -fx-border-radius: 10;");
+        newButton.setOnMouseEntered(e -> newButton.setStyle("-fx-background-radius: 10px; -fx-background-color: rgba(125, 125, 125, 0.6); -fx-text-fill: white;"));
+        newButton.setOnMouseExited(e -> newButton.setStyle("-fx-background-radius: 10px; -fx-background-color: rgba(43, 43, 43, 0.6); -fx-text-fill: white; -fx-border-color: #454545; -fx-border-radius: 10;"));
         newButton.setOnAction(e -> {
             time.stopTimer();
+            playerGame.setMoves(0);
+            moves = 0;
             App newGameApp = new App();
             newGameApp.start(stage);
         });
-        Label nameTest = new Label(player.getName());
+
+        //create reset button to suffle again
         Button resetButton = new Button("Reset");
+        resetButton.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        resetButton.setStyle("-fx-background-radius: 10px; -fx-background-color: rgba(43, 43, 43, 0.6) ; -fx-text-fill: white; -fx-border-color: #454545; -fx-border-radius: 10;");
+        resetButton.setOnMouseEntered(e -> resetButton.setStyle("-fx-background-radius: 10px; -fx-background-color: rgba(125, 125, 125, 0.6); -fx-text-fill: white;"));
+        resetButton.setOnMouseExited(e -> resetButton.setStyle("-fx-background-radius: 10px; -fx-background-color: rgba(43, 43, 43, 0.6); -fx-text-fill: white; -fx-border-color: #454545; -fx-border-radius: 10;"));
         resetButton.setPadding(new Insets(10, 10, 10,10));
-        Button testButton = new Button("end game");
-        testButton.setOnAction(e -> winContent(stage));
+        
+        Text descGame = new Text("Move tiles in grid to order them from 1 to 15.");
+        descGame.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        descGame.setWrappingWidth(320);
+        descGame.setTextAlignment(TextAlignment.CENTER);
+        descGame.setFill(Color.WHITE);
 
         HBox buttonLayout = new HBox(10);
-        buttonLayout.getChildren().addAll(newButton, resetButton, nameTest, testButton);
+        buttonLayout.getChildren().addAll(newButton, resetButton);
         buttonLayout.setAlignment(Pos.CENTER);
-        VBox layout = new VBox();
-        layout.getChildren().addAll(buttonLayout, time.getTimeLabel(), createContent(stage));
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(text, buttonLayout, time.getTimeLabel(), createContent(stage, time), descGame);
         layout.setAlignment(Pos.CENTER);
+        layout.setStyle("-fx-background-image: url('https://w0.peakpx.com/wallpaper/221/607/HD-wallpaper-like-heaven.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 620 620; -fx-background-position: center center;");
         
-        Scene gameScene = new Scene(layout, 420, 500);
-        gameScene.setFill(Color.web("#FFFFFF"));
+        Scene gameScene = new Scene(layout, 420, 620);
+        gameScene.setFill(Color.WHITE);
         stage.setScene(gameScene);
         
         resetButton.setOnAction(e -> {
             time.stopTimer();
+            moves = 0;
             player.setMoves(0);
             startGame(stage, player);});
 
@@ -76,17 +102,19 @@ public class Game {
         stage.show();
     }
 
-    public static Parent createContent(Stage stage) {
+    public static Parent createContent(Stage stage, Timer time) {
         GridPane root = new GridPane();
         root.setPrefSize(cellSize * nCell, cellSize * nCell);
         root.setPadding(new Insets(10, 10, 10, 10));
 
         //When game start : suffle
-        shuffleBoard();
+        do {
+            shuffleBoard();
+        } while (!Rules.isSolvable(board, array, nCell));
 
         for (int y = 0; y < nCell; y++) {
             for (int x = 0; x < nCell; x++) {
-                Cell tile = new Cell(x, y, stage);
+                Cell tile = new Cell(x, y, stage, time);
                 root.getChildren().add(tile);
             }
         }
@@ -95,7 +123,7 @@ public class Game {
 
     private static class Cell extends StackPane {
 
-        Cell(int y, int x, Stage stage) {
+        Cell(int y, int x, Stage stage, Timer time) {
             button[y][x] = new Button();
             setTranslateX(x * cellSize);
             setTranslateY(y * cellSize);
@@ -111,7 +139,7 @@ public class Game {
                 button[y][x].setStyle(nonButtonStyle);
             }
             
-            button[y][x].setOnAction(e -> swapTheTile(x, y, stage));
+            button[y][x].setOnAction(e -> swapTheTile(x, y, stage, time));
             getChildren().add(button[y][x]);
         }
     }
@@ -159,7 +187,7 @@ public class Game {
         return true;
     }
 
-    public static void swapTheTile(int x, int y, Stage stage) {
+    public static void swapTheTile(int x, int y, Stage stage, Timer time) {
         win = isWin();
         if (win == false) {
             if (board[y][x] != -1) {
@@ -191,6 +219,8 @@ public class Game {
         }
         win = isWin();
         if (win == true) {
+            playerGame.setTimeCost(Integer.valueOf(time.getTimeLabel().getText()));
+            time.stopTimer();
             winContent(stage);
         }
     }
@@ -211,12 +241,29 @@ public class Game {
 
     public static void winContent(Stage winStage) {
         winStage.setTitle("Win");
+        
         Label winLabel1 = new Label("Congrats " + playerGame.getName());
+        winLabel1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        winLabel1.setTextFill(Color.WHITE);
+        
         Label winLabel2 = new Label("You solved the puzzle");
+        winLabel2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        winLabel2.setTextFill(Color.WHITE);
+        
         Label winLabel3 = new Label("Moves : " + playerGame.getMoves());
-        VBox layoutWinText = new VBox();
-        layoutWinText.getChildren().addAll(winLabel1, winLabel2, winLabel3, newButton);
-        Scene winScene = new Scene(layoutWinText);
+        winLabel3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        winLabel3.setTextFill(Color.WHITE);
+        
+        Label winLabel4 = new Label("Time Cost : " + playerGame.getTimeCost());
+        winLabel4.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        winLabel4.setTextFill(Color.WHITE);
+
+        VBox layoutWinText = new VBox(20);
+        layoutWinText.getChildren().addAll(winLabel1, winLabel2, winLabel3, winLabel4, newButton);
+        layoutWinText.setAlignment(Pos.CENTER);
+        layoutWinText.setStyle("-fx-background-image: url('https://w0.peakpx.com/wallpaper/221/607/HD-wallpaper-like-heaven.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 620 620; -fx-background-position: center center;");
+        
+        Scene winScene = new Scene(layoutWinText, 420, 620);
         winStage.setScene(winScene);
         winStage.showAndWait();
     }

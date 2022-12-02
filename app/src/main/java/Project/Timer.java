@@ -5,6 +5,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import javafx.scene.control.Label;
+import javafx.scene.text.*;
+import javafx.scene.paint.Color;
 
 public class Timer {
     private static Label label;
@@ -13,6 +15,8 @@ public class Timer {
 
     public Timer() {
         label = new Label();
+        label.setTextFill(Color.WHITE);
+        label.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
         count = 1;
     }
 
