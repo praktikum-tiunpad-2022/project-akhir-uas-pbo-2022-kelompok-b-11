@@ -95,7 +95,7 @@ public class Game {
         VBox layout = new VBox(10);
         layout.getChildren().addAll(text, buttonLayout, infoLayout, createContent(stage, time), descGame);
         layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-background-image: url('https://w0.peakpx.com/wallpaper/221/607/HD-wallpaper-like-heaven.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 620 620; -fx-background-position: center center;");
+        layout.setStyle("-fx-background-image: url('background.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 620 620; -fx-background-position: center center;");
         
         Scene gameScene = new Scene(layout, 420, 620);
         gameScene.setFill(Color.WHITE);
@@ -270,7 +270,7 @@ public class Game {
         VBox layoutWinText = new VBox(20);
         layoutWinText.getChildren().addAll(winLabel1, winLabel2, winLabel3, winLabel4, newButton);
         layoutWinText.setAlignment(Pos.CENTER);
-        layoutWinText.setStyle("-fx-background-image: url('https://w0.peakpx.com/wallpaper/221/607/HD-wallpaper-like-heaven.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 620 620; -fx-background-position: center center;");
+        layoutWinText.setStyle("-fx-background-image: url('background.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 620 620; -fx-background-position: center center;");
         
         Scene winScene = new Scene(layoutWinText, 420, 620);
         winStage.setScene(winScene);

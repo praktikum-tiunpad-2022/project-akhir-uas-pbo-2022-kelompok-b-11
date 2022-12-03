@@ -60,7 +60,7 @@ public class App extends Application {
         root.getChildren().addAll(tittle, desc, name, play);
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(20, 20, 20, 20));
-        root.setStyle("-fx-background-image: url('https://w0.peakpx.com/wallpaper/221/607/HD-wallpaper-like-heaven.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 620 620; -fx-background-position: center center;");
+        root.setStyle("-fx-background-image: url('background.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 620 620; -fx-background-position: center center;");
         return root;
     }
 
