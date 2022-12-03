@@ -83,8 +83,17 @@ public class Game {
         buttonLayout.getChildren().addAll(newButton, resetButton);
         buttonLayout.setAlignment(Pos.CENTER);
 
+        Label timeCount = new Label("Time : ");
+        timeCount.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        timeCount.setTextFill(Color.WHITE);
+
+        HBox infoLayout = new HBox(50);
+        infoLayout.getChildren().addAll(timeCount, time.getTimeLabel());
+        infoLayout.setAlignment(Pos.CENTER);
+
+
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(text, buttonLayout, time.getTimeLabel(), createContent(stage, time), descGame);
+        layout.getChildren().addAll(text, buttonLayout, infoLayout, createContent(stage, time), descGame);
         layout.setAlignment(Pos.CENTER);
         layout.setStyle("-fx-background-image: url('https://w0.peakpx.com/wallpaper/221/607/HD-wallpaper-like-heaven.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 620 620; -fx-background-position: center center;");
         
