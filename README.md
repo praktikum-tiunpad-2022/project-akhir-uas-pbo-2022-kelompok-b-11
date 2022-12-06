@@ -47,7 +47,7 @@ This repository is a final project (Java GUI) from Object-Oriented Programming C
 - class Player : untuk menyimpan data dan method dari player
 - class Rules : untuk menyimpan data dan method aturan dalam game
 
-UML : https://github.com/praktikum-tiunpad-2022/project-akhir-uas-pbo-2022-kelompok-b-11/blob/02a45317e2bbd5816d0effc8ac23a3f4da1dc380/Praktikum%2015%20Game%20Puzzle.drawio.png
+![alt text](15 Puzzle Game.png)
 
 ## Notable Assumption and Design App Details
 
