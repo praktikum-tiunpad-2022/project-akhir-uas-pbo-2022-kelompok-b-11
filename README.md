@@ -45,9 +45,10 @@ This repository is a final project (Java GUI) from Object-Oriented Programming C
 
 - class Game : untuk membuat method yang membuat game berjalan
 - class Player : untuk menyimpan data dan method dari player
-- class Rules : untuk menyimpan data dan method aturan dalam game
+- class Timer : untuk menghitung waktu yang dibutuhkan dalam menyelesaikan permainan
+- class Rules : untuk menyimpan data dan method aturan dalam game seperti isSolvable
 
-![alt text](15 Puzzle Game.png)
+URL : https://github.com/praktikum-tiunpad-2022/project-akhir-uas-pbo-2022-kelompok-b-11/blob/2feb9f3598cc7e278dda9b4c267ca2428f1908ce/UML%2015%20Puzzle%20Game.png
 
 ## Notable Assumption and Design App Details
 
