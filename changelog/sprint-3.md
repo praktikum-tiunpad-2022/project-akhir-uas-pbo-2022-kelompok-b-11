@@ -2,11 +2,11 @@
 | 30 November 2022 - 6 Desember 2022
 
 ## Team (Insert your name)
-| NPM           | Name        |
-| ------------- |-------------|
-| 140810xx00xx  | John Doe    |
-| 140810xx00xx  | Jane Doe    |
-| 140810xx00xx  | Lorem Ipsum |
+| NPM           | Name              |
+| ------------- |-------------------|
+| 140810210006  | Glory Cornelia    |
+| 140810210008  | Nabila Sa'diyyah  |
+| 140810210020  | Devina Dixie      |
 
 ## Sprint Overview
 | Planned (n)   | Completed (n) |
