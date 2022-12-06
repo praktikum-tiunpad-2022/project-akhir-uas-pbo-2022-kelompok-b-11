@@ -1,5 +1,5 @@
 # Scrum Report (Sprint 3)
-| From dd/mm/yyyy to dd/mm/yyyy
+| 30 November 2022 - 6 Desember 2022
 
 ## Team (Insert your name)
 | NPM           | Name        |
@@ -11,14 +11,17 @@
 ## Sprint Overview
 | Planned (n)   | Completed (n) |
 | ------------- |-------------- |
-| n             | n             |
+| 5             | 5             |
 
 ## Sprint 3 Backlog
 
-| ID  | Title/Desc | Asignee | Status |
-| --- | ---------- | ------- | ------ |
-| 3.1 | Preparing the x | Jane Doe | DONE |
-| 3.2 | Make the x | John Doe | FAILED |
+| ID  | Title/Desc                                 | Asignee | Status |
+| --- | ------------------------------------------ | ------- | ------ |
+| 2.2 | membuat mekanisme win                      | Glory   | DONE   |
+| 3.2 | menyempurnakan tampilan dan movenya        | Nabila  | DONE   |
+| 3.3 | melakukan running test                     | Glory   | DONE   |
+| 3.4 | melakukan running test                     | Nabila  | DONE   |
+| 3.5 | melakukan running test                     | Devina  | DONE   |
 
 ## Retrospective 
 
